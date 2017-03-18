@@ -17,5 +17,8 @@
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.0.0",
     "gulp-sass": "^3.1.0"
+  },
+  "dependencies": {
+    "gulp-uglifycss": "^1.0.6"
   }
 }

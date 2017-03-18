@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var connect = require('gulp-connect');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
+var uglifycss = require('gulp-uglifycss');
 
 gulp.task('connect', function() {
     connect.server({
@@ -32,4 +33,14 @@ gulp.task('watch', function() {
     gulp.watch('./src/js/**/*.js', ['js']);
 });
 
-gulp.task('default', ['connect', 'sass', 'js', 'watch']);
+gulp.task('minifying', function () {
+    gulp.src('./src/sass/**/*.scss')
+        .pipe(uglifycss({
+            "maxLineLen": 80,
+            "uglyComments": true
+        }))
+        .pipe(concat('stylemin.css'))
+        .pipe(gulp.dest('./web/assets'));
+});
+
+gulp.task('default', ['connect', 'sass', 'js', 'watch', 'minifying']);
